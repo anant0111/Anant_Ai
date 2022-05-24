@@ -70,14 +70,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newMatch() {  //A game is composed of three matches
-
         int operand1 = random.nextInt(10);
-        int operand2=0;
+        int operand2=random.nextInt(10);
+        correctButton = random.nextInt(3);
         //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
         String operator = operators[random.nextInt(4)];
         textView2.setText(operand1 + operator + operand2);
-
-      // Your code here, to diplay correct and incorrect options on the buttons
+        int rnd1 = random.nextInt(10);
+        int rnd2 = random.nextInt(20);
+        // Your code here, to diplay correct and incorrect options on the buttons
+        if(correctButton==0) {
+            if (operator.equals("-")) {
+                button1.setText(operand1 - operand2 + " ");
+            } else if (operator.equals("+")) {
+                button1.setText(operand1 + operand2 + " ");
+            } else if (operator.equals("*")) {
+                button1.setText(operand1 * operand2 + " ");
+            } else {
+                button1.setText(operand1 / operand2 + " ");
+            }
+            button2.setText(rnd1+rnd2+" ");
+            button3.setText(rnd1-rnd2+" ");
+            button4.setText(rnd1*rnd2+" ");
+        }
+        else if(correctButton==1){
+            if (operator.equals("-")) {
+                button2.setText(operand1 - operand2 + " ");
+            } else if (operator.equals("+")) {
+                button2.setText(operand1 + operand2 + " ");
+            } else if (operator.equals("*")) {
+                button2.setText(operand1 * operand2 + " ");
+            } else {
+                button2.setText(operand1 / operand2 + " ");
+            }
+            button1.setText(rnd1+rnd2+" ");
+            button3.setText(rnd1-rnd2+" ");
+            button4.setText(rnd1*rnd2+" ");
+        }
+        else if(correctButton==2){
+            if (operator.equals("-")) {
+                button3.setText(operand1 - operand2 + " ");
+            } else if (operator.equals("+")) {
+                button3.setText(operand1 + operand2 + " ");
+            } else if (operator.equals("*")) {
+                button3.setText(operand1 * operand2 + " ");
+            } else {
+                button3.setText(operand1 / operand2 + " ");
+            }
+            button1.setText(rnd1+rnd2+" ");
+            button2.setText(rnd1-rnd2+" ");
+            button4.setText(rnd1*rnd2+" ");
+        }
+        else {
+            if (operator.equals("-")) {
+                button4.setText(operand1 - operand2 + " ");
+            } else if (operator.equals("+")) {
+                button4.setText(operand1 + operand2 + " ");
+            } else if (operator.equals("*")) {
+                button4.setText(operand1 * operand2 + " ");
+            } else {
+                button4.setText(operand1 / operand2 + " ");
+            }
+            button2.setText(rnd1+rnd2+" ");
+            button3.setText(rnd1-rnd2+" ");
+            button1.setText(rnd1*rnd2+" ");
+        }
 
         if(matchCounter==3){    // if three matches are completed updatee the perfomrance in sharedpreferences
 
@@ -95,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
     public int sumOfScore(){
         //Computing the sum of score array, which has the 1 or in each index,depending on correct or incorrect answers
         int sum=0;
+        int i;
+        for(i=0;i<score.length;i++)
+            sum+=score[i];
+
+
        // your code here
         return sum;
     }
@@ -113,8 +175,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String getInterpretation(int [][]dataFrame,double slope){
+       double myslope =LR.getSlope(dataFrame);
+       if(myslope<0) return " you are not sincear";
+       else if(myslope>0 && myslope<0.5) return "you are slow but playing good";
+       else if(myslope>0.5 && myslope<14) return "playing good";
+       else return " postive slope";
+
+
+
        //provide interpretation based on your slope analysis
         // Your code here
-        return "Your Interpretation";
+       // return "Your Interpretation";
     }
 }
